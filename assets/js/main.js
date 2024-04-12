@@ -6,7 +6,17 @@
 * License: https://bootstrapmade.com/license/
 */
 
-
+ const preloader = document.querySelector('#preloader');
+  if (preloader) {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        preloader.classList.add('loaded');
+      }, 1000);
+      setTimeout(() => {
+        preloader.remove();
+      } );
+    });
+  }
 
   /**
    * Mobile nav toggle
