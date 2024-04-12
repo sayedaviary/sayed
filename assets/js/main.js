@@ -1,59 +1,40 @@
+
 /**
-* Template Name: PhotoFolio
-* Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
-* Updated: Mar 17 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+ * Mobile nav toggle
+ */
+const mobileNavShow = document.querySelector('.mobile-nav-show');
+const mobileNavHide = document.querySelector('.mobile-nav-hide');
 
- const preloader = document.querySelector('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        preloader.classList.add('loaded');
-      }, 1000);
-      setTimeout(() => {
-        preloader.remove();
-      } );
-    });
-  }
+document.querySelectorAll('.mobile-nav-toggle').forEach(el => {
+  el.addEventListener('click', function(event) {
+    event.preventDefault();
+    mobileNavToogle();
+  })
+});
 
-  /**
-   * Mobile nav toggle
-   */
-  const mobileNavShow = document.querySelector('.mobile-nav-show');
-  const mobileNavHide = document.querySelector('.mobile-nav-hide');
+function mobileNavToogle() {
+  document.querySelector('body').classList.toggle('mobile-nav-active');
+  mobileNavShow.classList.toggle('d-none');
+  mobileNavHide.classList.toggle('d-none');
+}
 
-  document.querySelectorAll('.mobile-nav-toggle').forEach(el => {
-    el.addEventListener('click', function(event) {
-      event.preventDefault();
+/**
+ * Hide mobile nav on same-page/hash links
+ */
+document.querySelectorAll('#navbar a').forEach(navbarlink => {
+
+  if (!navbarlink.hash) return;
+
+  let section = document.querySelector(navbarlink.hash);
+  if (!section) return;
+
+  navbarlink.addEventListener('click', () => {
+    if (document.querySelector('.mobile-nav-active')) {
       mobileNavToogle();
-    })
+    }
   });
 
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavShow.classList.toggle('d-none');
-    mobileNavHide.classList.toggle('d-none');
-  }
-
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navbar a').forEach(navbarlink => {
-
-    if (!navbarlink.hash) return;
-
-    let section = document.querySelector(navbarlink.hash);
-    if (!section) return;
-
-    navbarlink.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
-      }
-    });
-
-  });
+});
 
   /**
    * Toggle mobile nav dropdowns
